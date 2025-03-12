@@ -1,0 +1,605 @@
+# 如果觉得好用，请收藏或则分享本站
+experimental:
+  clash_api:
+    external_controller: ''
+    secret: ''
+  debug:
+    max_threads: null
+    panic_on_fault: false
+  cache_file:
+    enabled: false
+    path: ''
+    store_fakeip: true
+log:
+  disabled: false
+  level: info
+  output: ''
+  timestamp: true
+ntp:
+  enabled: false
+  server: time.windows.com
+  server_port: 123
+  interval: 12h
+  detour: direct_out
+dns:
+  final: dns_proxy_out
+  rules:
+    - domain:
+        - sg01.poke-mon.xyz
+        - sg02.poke-mon.xyz
+        - jp01.poke-mon.xyz
+        - jp02.poke-mon.xyz
+        - jp04.poke-mon.xyz
+        - jp03.poke-mon.xyz
+        - hk02.poke-mon.xyz
+        - tw.poke-mon.xyz
+        - us01.poke-mon.xyz
+        - uk01.poke-mon.xyz
+        - uk02.poke-mon.xyz
+        - aodaliya.poke-mon.xyz
+        - deguo.poke-mon.xyz
+        - yuenan.poke-mon.xyz
+        - sssg01.136470.xyz
+        - sssg02.136470.xyz
+        - sssg03.136470.xyz
+        - sssg04.136470.xyz
+        - ssjp01.136470.xyz
+        - ssjp02.136470.xyz
+        - ssjp03.136470.xyz
+        - ssjp06.136470.xyz
+        - ssjp07.136470.xyz
+        - sskr01.136470.xyz
+        - sskr02.136470.xyz
+        - sskr03.136470.xyz
+        - sskr04.136470.xyz
+        - ssus01.136470.xyz
+        - ssus02.136470.xyz
+        - ssus03.136470.xyz
+        - ssus04.136470.xyz
+      server: dns_direct_out
+    - domain_suffix:
+        - o4508911573663744.ingest.sentry.io
+      server: dns_direct_out
+    - domain_suffix:
+        - speed.cloudflare.com
+      server: dns_proxy_out
+    - domain_suffix:
+        - karing.app
+      server: dns_proxy_out
+    - rule_set:
+        - 'geosite:cn'
+      server: dns_direct_out
+  servers:
+    - tag: dns_direct_out
+      address: local
+    - tag: dns_proxy_out
+      address: 'https://1.1.1.1/dns-query'
+      address_resolver: dns_resolver_out
+      detour: urltest_out
+    - tag: dns_resolver_out
+      address: local
+    - tag: dns_block_out
+      address: 'rcode://success'
+  strategy: ipv4_only
+  independent_cache: true
+  cache_capacity: 10000
+inbounds:
+  - type: mixed
+    tag: mixed_in_direct
+    set_system_proxy: false
+    listen: 127.0.0.1
+    listen_port: 3065
+    sniff: true
+  - type: mixed
+    tag: mixed_in_proxy
+    set_system_proxy: false
+    listen: 127.0.0.1
+    listen_port: 3066
+    sniff: true
+  - type: mixed
+    tag: mixed_in_rule
+    set_system_proxy: false
+    listen: 127.0.0.1
+    listen_port: 3067
+    sniff: true
+outbounds:
+  - tag: "\U0001F1F8\U0001F1EC【亚洲】新加坡01丨直连"
+    server: sg01.poke-mon.xyz
+    server_port: 20000
+    domain_resolver: local
+    tls:
+      enabled: true
+      insecure: true
+      server_name: www.bing.com
+    password: f1f43f5a-9b9d-4511-84aa-d951be23f796
+    type: hysteria2
+  - tag: "\U0001F1F8\U0001F1EC【亚洲】新加坡02丨直连"
+    server: sg02.poke-mon.xyz
+    server_port: 20000
+    domain_resolver: local
+    tls:
+      enabled: true
+      insecure: true
+      server_name: www.bing.com
+    password: f1f43f5a-9b9d-4511-84aa-d951be23f796
+    type: hysteria2
+  - tag: "\U0001F1F8\U0001F1EC【亚洲】新加坡03丨直连"
+    server: sg02.poke-mon.xyz
+    server_port: 20000
+    domain_resolver: local
+    tls:
+      enabled: true
+      insecure: true
+      server_name: www.bing.com
+    password: f1f43f5a-9b9d-4511-84aa-d951be23f796
+    type: hysteria2
+  - tag: "\U0001F1EF\U0001F1F5【亚洲】日本01丨直连"
+    server: jp01.poke-mon.xyz
+    server_port: 20000
+    domain_resolver: local
+    tls:
+      enabled: true
+      insecure: true
+      server_name: www.bing.com
+    password: f1f43f5a-9b9d-4511-84aa-d951be23f796
+    type: hysteria2
+  - tag: "\U0001F1EF\U0001F1F5【亚洲】日本02丨直连"
+    server: jp02.poke-mon.xyz
+    server_port: 20000
+    domain_resolver: local
+    tls:
+      enabled: true
+      insecure: true
+      server_name: www.bing.com
+    password: f1f43f5a-9b9d-4511-84aa-d951be23f796
+    type: hysteria2
+  - tag: "\U0001F1EF\U0001F1F5【亚洲】日本03丨直连"
+    server: jp02.poke-mon.xyz
+    server_port: 20000
+    domain_resolver: local
+    tls:
+      enabled: true
+      insecure: true
+      server_name: www.bing.com
+    password: f1f43f5a-9b9d-4511-84aa-d951be23f796
+    type: hysteria2
+  - tag: "\U0001F1EF\U0001F1F5【亚洲】日本樱花03丨直连【2x】"
+    server: jp04.poke-mon.xyz
+    server_port: 443
+    domain_resolver: local
+    tls:
+      enabled: true
+      insecure: true
+      server_name: www.bing.com
+    password: f1f43f5a-9b9d-4511-84aa-d951be23f796
+    type: hysteria2
+  - tag: "\U0001F1EF\U0001F1F5【亚洲】日本樱花04丨直连【2x】"
+    server: jp04.poke-mon.xyz
+    server_port: 443
+    domain_resolver: local
+    tls:
+      enabled: true
+      insecure: true
+      server_name: www.bing.com
+    password: f1f43f5a-9b9d-4511-84aa-d951be23f796
+    type: hysteria2
+  - tag: "\U0001F1EF\U0001F1F5【亚洲】日本原生05丨直连【2x】"
+    server: jp03.poke-mon.xyz
+    server_port: 443
+    domain_resolver: local
+    tls:
+      enabled: true
+      insecure: true
+      server_name: www.bing.com
+    password: f1f43f5a-9b9d-4511-84aa-d951be23f796
+    type: hysteria2
+  - tag: "\U0001F1EF\U0001F1F5【亚洲】日本原生06丨直连【2x】"
+    server: jp03.poke-mon.xyz
+    server_port: 443
+    domain_resolver: local
+    tls:
+      enabled: true
+      insecure: true
+      server_name: www.bing.com
+    password: f1f43f5a-9b9d-4511-84aa-d951be23f796
+    type: hysteria2
+  - tag: "\U0001F1EF\U0001F1F5【亚洲】日本原生07丨直连【2x】"
+    server: jp03.poke-mon.xyz
+    server_port: 443
+    domain_resolver: local
+    tls:
+      enabled: true
+      insecure: true
+      server_name: www.bing.com
+    password: f1f43f5a-9b9d-4511-84aa-d951be23f796
+    type: hysteria2
+  - tag: "\U0001F1ED\U0001F1F0【亚洲】香港01丨直连"
+    server: hk02.poke-mon.xyz
+    server_port: 20000
+    domain_resolver: local
+    tls:
+      enabled: true
+      insecure: true
+      server_name: www.bing.com
+    password: f1f43f5a-9b9d-4511-84aa-d951be23f796
+    type: hysteria2
+  - tag: "\U0001F1ED\U0001F1F0【亚洲】香港02丨直连"
+    server: hk02.poke-mon.xyz
+    server_port: 20000
+    domain_resolver: local
+    tls:
+      enabled: true
+      insecure: true
+      server_name: www.bing.com
+    password: f1f43f5a-9b9d-4511-84aa-d951be23f796
+    type: hysteria2
+  - tag: "\U0001F1ED\U0001F1F0【亚洲】香港03丨直连"
+    server: hk02.poke-mon.xyz
+    server_port: 20000
+    domain_resolver: local
+    tls:
+      enabled: true
+      insecure: true
+      server_name: www.bing.com
+    password: f1f43f5a-9b9d-4511-84aa-d951be23f796
+    type: hysteria2
+  - tag: "\U0001F1F9\U0001F1FC【亚洲】台湾家宽01丨直连"
+    server: tw.poke-mon.xyz
+    server_port: 20000
+    domain_resolver: local
+    tls:
+      enabled: true
+      insecure: true
+      server_name: www.bing.com
+    password: f1f43f5a-9b9d-4511-84aa-d951be23f796
+    type: hysteria2
+  - tag: "\U0001F1F9\U0001F1FC【亚洲】台湾家宽02丨直连"
+    server: tw.poke-mon.xyz
+    server_port: 20000
+    domain_resolver: local
+    tls:
+      enabled: true
+      insecure: true
+      server_name: www.bing.com
+    password: f1f43f5a-9b9d-4511-84aa-d951be23f796
+    type: hysteria2
+  - tag: "\U0001F1FA\U0001F1F8【北美洲】美国01丨直连"
+    server: us01.poke-mon.xyz
+    server_port: 20000
+    domain_resolver: local
+    tls:
+      enabled: true
+      insecure: true
+      server_name: www.bing.com
+    password: f1f43f5a-9b9d-4511-84aa-d951be23f796
+    type: hysteria2
+  - tag: "\U0001F1FA\U0001F1F8【北美洲】美国02丨直连"
+    server: us01.poke-mon.xyz
+    server_port: 20000
+    domain_resolver: local
+    tls:
+      enabled: true
+      insecure: true
+      server_name: www.bing.com
+    password: f1f43f5a-9b9d-4511-84aa-d951be23f796
+    type: hysteria2
+  - tag: "\U0001F1EC\U0001F1E7【欧洲】英国01丨直连"
+    server: uk01.poke-mon.xyz
+    server_port: 20000
+    domain_resolver: local
+    tls:
+      enabled: true
+      insecure: true
+      server_name: www.bing.com
+    password: f1f43f5a-9b9d-4511-84aa-d951be23f796
+    type: hysteria2
+  - tag: "\U0001F1EC\U0001F1E7【欧洲】英国原生02丨直连【2x】"
+    server: uk02.poke-mon.xyz
+    server_port: 443
+    domain_resolver: local
+    tls:
+      enabled: true
+      insecure: true
+      server_name: www.olympics.com
+    password: f1f43f5a-9b9d-4511-84aa-d951be23f796
+    type: hysteria2
+  - tag: "\U0001F1E6\U0001F1FA【大洋洲】澳大利亚丨直连"
+    server: aodaliya.poke-mon.xyz
+    server_port: 20000
+    domain_resolver: local
+    tls:
+      enabled: true
+      insecure: true
+      server_name: www.bing.com
+    password: f1f43f5a-9b9d-4511-84aa-d951be23f796
+    type: hysteria2
+  - tag: "\U0001F1E9\U0001F1EA【欧洲】德国丨直连"
+    server: deguo.poke-mon.xyz
+    server_port: 20000
+    domain_resolver: local
+    tls:
+      enabled: true
+      insecure: true
+      server_name: www.bing.com
+    password: f1f43f5a-9b9d-4511-84aa-d951be23f796
+    type: hysteria2
+  - tag: "\U0001F1FB\U0001F1F3【东南亚】越南丨直连"
+    server: yuenan.poke-mon.xyz
+    server_port: 20000
+    domain_resolver: local
+    tls:
+      enabled: true
+      insecure: true
+      server_name: www.bing.com
+    password: f1f43f5a-9b9d-4511-84aa-d951be23f796
+    type: hysteria2
+  - tag: "\U0001F1F8\U0001F1EC【亚洲】新加坡01丨专线【3x】"
+    type: shadowsocks
+    server: sssg01.136470.xyz
+    server_port: 55011
+    method: 2022-blake3-aes-128-gcm
+    password: 'YmE5ZWFhOGM5YTU3OTc2MQ==:ZjFmNDNmNWEtOWI5ZC00NQ=='
+    domain_resolver: local
+  - tag: "\U0001F1F8\U0001F1EC【亚洲】新加坡02丨专线【3x】"
+    type: shadowsocks
+    server: sssg02.136470.xyz
+    server_port: 45012
+    method: 2022-blake3-aes-128-gcm
+    password: 'YmE5ZWFhOGM5YTU3OTc2MQ==:ZjFmNDNmNWEtOWI5ZC00NQ=='
+    domain_resolver: local
+  - tag: "\U0001F1F8\U0001F1EC【亚洲】新加坡03丨专线【3x】"
+    type: shadowsocks
+    server: sssg03.136470.xyz
+    server_port: 55013
+    method: 2022-blake3-aes-128-gcm
+    password: 'YmE5ZWFhOGM5YTU3OTc2MQ==:ZjFmNDNmNWEtOWI5ZC00NQ=='
+    domain_resolver: local
+  - tag: "\U0001F1F8\U0001F1EC【亚洲】新加坡04丨超速【3x】"
+    type: trojan
+    server: sssg04.136470.xyz
+    server_port: 55015
+    password: f1f43f5a-9b9d-4511-84aa-d951be23f796
+    domain_resolver: local
+    tls:
+      enabled: true
+      insecure: true
+      server_name: sssg04.136470.xyz
+  - tag: "\U0001F1F8\U0001F1EC【亚洲】新加坡05丨超速【3x】"
+    type: trojan
+    server: sssg04.136470.xyz
+    server_port: 55015
+    password: f1f43f5a-9b9d-4511-84aa-d951be23f796
+    domain_resolver: local
+    tls:
+      enabled: true
+      insecure: true
+      server_name: sssg04.136470.xyz
+  - tag: "\U0001F1F8\U0001F1EC【亚洲】新加坡06丨超速【3x】"
+    type: trojan
+    server: sssg04.136470.xyz
+    server_port: 55015
+    password: f1f43f5a-9b9d-4511-84aa-d951be23f796
+    domain_resolver: local
+    tls:
+      enabled: true
+      insecure: true
+      server_name: 172.104.55.253
+  - tag: "\U0001F1EF\U0001F1F5【亚洲】日本01丨专线【3x】"
+    type: shadowsocks
+    server: ssjp01.136470.xyz
+    server_port: 54025
+    method: 2022-blake3-aes-128-gcm
+    password: 'NGM1NzQyOGFkNWEyMTZjNA==:ZjFmNDNmNWEtOWI5ZC00NQ=='
+    domain_resolver: local
+  - tag: "\U0001F1EF\U0001F1F5【亚洲】日本02丨专线【3x】"
+    type: shadowsocks
+    server: ssjp02.136470.xyz
+    server_port: 54026
+    method: 2022-blake3-aes-128-gcm
+    password: 'NGM1NzQyOGFkNWEyMTZjNA==:ZjFmNDNmNWEtOWI5ZC00NQ=='
+    domain_resolver: local
+  - tag: "\U0001F1EF\U0001F1F5【亚洲】日本03丨专线【3x】"
+    type: shadowsocks
+    server: ssjp03.136470.xyz
+    server_port: 54027
+    method: 2022-blake3-aes-128-gcm
+    password: 'NGM1NzQyOGFkNWEyMTZjNA==:ZjFmNDNmNWEtOWI5ZC00NQ=='
+    domain_resolver: local
+  - tag: "\U0001F1EF\U0001F1F5【亚洲】日本原生04丨专线【4x】"
+    type: shadowsocks
+    server: ssjp06.136470.xyz
+    server_port: 54030
+    method: 2022-blake3-aes-128-gcm
+    password: 'YTYyZDM5ZTRiMjQzYzUyNg==:ZjFmNDNmNWEtOWI5ZC00NQ=='
+    domain_resolver: local
+  - tag: "\U0001F1EF\U0001F1F5【亚洲】日本原生05丨专线【4x】"
+    type: shadowsocks
+    server: ssjp07.136470.xyz
+    server_port: 54031
+    method: 2022-blake3-aes-128-gcm
+    password: 'YTYyZDM5ZTRiMjQzYzUyNg==:ZjFmNDNmNWEtOWI5ZC00NQ=='
+    domain_resolver: local
+  - tag: "\U0001F1F0\U0001F1F7【亚洲】韩国家宽01丨专线【6x】"
+    type: shadowsocks
+    server: sskr01.136470.xyz
+    server_port: 59107
+    method: 2022-blake3-aes-128-gcm
+    password: 'NzhjYmI3OWQ0OTA5OWQ3ZQ==:ZjFmNDNmNWEtOWI5ZC00NQ=='
+    domain_resolver: local
+  - tag: "\U0001F1F0\U0001F1F7【亚洲】韩国家宽02丨专线【6x】"
+    type: shadowsocks
+    server: sskr02.136470.xyz
+    server_port: 59108
+    method: 2022-blake3-aes-128-gcm
+    password: 'NzhjYmI3OWQ0OTA5OWQ3ZQ==:ZjFmNDNmNWEtOWI5ZC00NQ=='
+    domain_resolver: local
+  - tag: "\U0001F1F0\U0001F1F7【亚洲】韩国家宽03丨专线【6x】"
+    type: shadowsocks
+    server: sskr03.136470.xyz
+    server_port: 59109
+    method: 2022-blake3-aes-128-gcm
+    password: 'NzhjYmI3OWQ0OTA5OWQ3ZQ==:ZjFmNDNmNWEtOWI5ZC00NQ=='
+    domain_resolver: local
+  - type: vless
+    tag: "\U0001F1F0\U0001F1F7【亚洲】韩国家宽04丨超速【6x】"
+    server: sskr04.136470.xyz
+    server_port: 59110
+    uuid: f1f43f5a-9b9d-4511-84aa-d951be23f796
+    domain_resolver: local
+    packet_encoding: xudp
+  - type: vless
+    tag: "\U0001F1F0\U0001F1F7【亚洲】韩国家宽05丨超速【6x】"
+    server: sskr04.136470.xyz
+    server_port: 59110
+    uuid: f1f43f5a-9b9d-4511-84aa-d951be23f796
+    domain_resolver: local
+    packet_encoding: xudp
+  - type: vless
+    tag: "\U0001F1F0\U0001F1F7【亚洲】韩国家宽06丨超速【6x】"
+    server: sskr04.136470.xyz
+    server_port: 59110
+    uuid: f1f43f5a-9b9d-4511-84aa-d951be23f796
+    domain_resolver: local
+    packet_encoding: xudp
+  - tag: "\U0001F1FA\U0001F1F8【北美洲】美国01丨专线【3x】"
+    type: shadowsocks
+    server: ssus01.136470.xyz
+    server_port: 56011
+    method: 2022-blake3-aes-128-gcm
+    password: 'MTA2ZTcwNDVjZjU1ZmQzNw==:ZjFmNDNmNWEtOWI5ZC00NQ=='
+    domain_resolver: local
+  - tag: "\U0001F1FA\U0001F1F8【北美洲】美国02丨专线【3x】"
+    type: shadowsocks
+    server: ssus02.136470.xyz
+    server_port: 56014
+    method: 2022-blake3-aes-128-gcm
+    password: 'MTA2ZTcwNDVjZjU1ZmQzNw==:ZjFmNDNmNWEtOWI5ZC00NQ=='
+    domain_resolver: local
+  - tag: "\U0001F1FA\U0001F1F8【北美洲】美国03丨专线【3x】"
+    type: shadowsocks
+    server: ssus03.136470.xyz
+    server_port: 56013
+    method: 2022-blake3-aes-128-gcm
+    password: 'MTA2ZTcwNDVjZjU1ZmQzNw==:ZjFmNDNmNWEtOWI5ZC00NQ=='
+    domain_resolver: local
+  - type: vless
+    tag: "\U0001F1FA\U0001F1F8【北美洲】美国04丨超速【3x】"
+    server: ssus04.136470.xyz
+    server_port: 56015
+    uuid: f1f43f5a-9b9d-4511-84aa-d951be23f796
+    domain_resolver: local
+    packet_encoding: xudp
+  - type: vless
+    tag: "\U0001F1FA\U0001F1F8【北美洲】美国05丨超速【3x】"
+    server: ssus04.136470.xyz
+    server_port: 56015
+    uuid: f1f43f5a-9b9d-4511-84aa-d951be23f796
+    domain_resolver: local
+    packet_encoding: xudp
+  - type: vless
+    tag: "\U0001F1FA\U0001F1F8【北美洲】美国06丨超速【3x】"
+    server: ssus04.136470.xyz
+    server_port: 56015
+    uuid: f1f43f5a-9b9d-4511-84aa-d951be23f796
+    domain_resolver: local
+    packet_encoding: xudp
+  - type: urltest
+    tag: urltest_out
+    url: 'https://www.gstatic.com/generate_204'
+    interval: 8h
+    interrupt_exist_connections: false
+    idle_timeout: 8h
+    outbounds:
+      - "\U0001F1F8\U0001F1EC【亚洲】新加坡01丨直连"
+      - "\U0001F1F8\U0001F1EC【亚洲】新加坡02丨直连"
+      - "\U0001F1F8\U0001F1EC【亚洲】新加坡03丨直连"
+      - "\U0001F1EF\U0001F1F5【亚洲】日本01丨直连"
+      - "\U0001F1EF\U0001F1F5【亚洲】日本02丨直连"
+      - "\U0001F1EF\U0001F1F5【亚洲】日本03丨直连"
+      - "\U0001F1EF\U0001F1F5【亚洲】日本樱花03丨直连【2x】"
+      - "\U0001F1EF\U0001F1F5【亚洲】日本樱花04丨直连【2x】"
+      - "\U0001F1EF\U0001F1F5【亚洲】日本原生05丨直连【2x】"
+      - "\U0001F1EF\U0001F1F5【亚洲】日本原生06丨直连【2x】"
+      - "\U0001F1EF\U0001F1F5【亚洲】日本原生07丨直连【2x】"
+      - "\U0001F1ED\U0001F1F0【亚洲】香港01丨直连"
+      - "\U0001F1ED\U0001F1F0【亚洲】香港02丨直连"
+      - "\U0001F1ED\U0001F1F0【亚洲】香港03丨直连"
+      - "\U0001F1F9\U0001F1FC【亚洲】台湾家宽01丨直连"
+      - "\U0001F1F9\U0001F1FC【亚洲】台湾家宽02丨直连"
+      - "\U0001F1FA\U0001F1F8【北美洲】美国01丨直连"
+      - "\U0001F1FA\U0001F1F8【北美洲】美国02丨直连"
+      - "\U0001F1EC\U0001F1E7【欧洲】英国01丨直连"
+      - "\U0001F1EC\U0001F1E7【欧洲】英国原生02丨直连【2x】"
+      - "\U0001F1E6\U0001F1FA【大洋洲】澳大利亚丨直连"
+      - "\U0001F1E9\U0001F1EA【欧洲】德国丨直连"
+      - "\U0001F1FB\U0001F1F3【东南亚】越南丨直连"
+      - "\U0001F1F8\U0001F1EC【亚洲】新加坡01丨专线【3x】"
+      - "\U0001F1F8\U0001F1EC【亚洲】新加坡02丨专线【3x】"
+      - "\U0001F1F8\U0001F1EC【亚洲】新加坡03丨专线【3x】"
+      - "\U0001F1F8\U0001F1EC【亚洲】新加坡04丨超速【3x】"
+      - "\U0001F1F8\U0001F1EC【亚洲】新加坡05丨超速【3x】"
+      - "\U0001F1F8\U0001F1EC【亚洲】新加坡06丨超速【3x】"
+      - "\U0001F1EF\U0001F1F5【亚洲】日本01丨专线【3x】"
+      - "\U0001F1EF\U0001F1F5【亚洲】日本02丨专线【3x】"
+      - "\U0001F1EF\U0001F1F5【亚洲】日本03丨专线【3x】"
+      - "\U0001F1EF\U0001F1F5【亚洲】日本原生04丨专线【4x】"
+      - "\U0001F1EF\U0001F1F5【亚洲】日本原生05丨专线【4x】"
+      - "\U0001F1F0\U0001F1F7【亚洲】韩国家宽01丨专线【6x】"
+      - "\U0001F1F0\U0001F1F7【亚洲】韩国家宽02丨专线【6x】"
+      - "\U0001F1F0\U0001F1F7【亚洲】韩国家宽03丨专线【6x】"
+      - "\U0001F1F0\U0001F1F7【亚洲】韩国家宽04丨超速【6x】"
+      - "\U0001F1F0\U0001F1F7【亚洲】韩国家宽05丨超速【6x】"
+      - "\U0001F1F0\U0001F1F7【亚洲】韩国家宽06丨超速【6x】"
+      - "\U0001F1FA\U0001F1F8【北美洲】美国01丨专线【3x】"
+      - "\U0001F1FA\U0001F1F8【北美洲】美国02丨专线【3x】"
+      - "\U0001F1FA\U0001F1F8【北美洲】美国03丨专线【3x】"
+      - "\U0001F1FA\U0001F1F8【北美洲】美国04丨超速【3x】"
+      - "\U0001F1FA\U0001F1F8【北美洲】美国05丨超速【3x】"
+      - "\U0001F1FA\U0001F1F8【北美洲】美国06丨超速【3x】"
+  - type: direct
+    tag: direct_out
+  - type: block
+    tag: block_out
+  - type: dns
+    tag: dns_out
+route:
+  final: urltest_out
+  find_process: true
+  auto_detect_interface: true
+  rules:
+    - inbound:
+        - mixed_in_direct
+      outbound: direct_out
+    - inbound:
+        - mixed_in_proxy
+      outbound: urltest_out
+    - protocol: dns
+      outbound: dns_out
+    - domain_suffix:
+        - o4508911573663744.ingest.sentry.io
+      outbound: direct_out
+    - domain_suffix:
+        - speed.cloudflare.com
+      outbound: urltest_out
+    - domain_suffix:
+        - karing.app
+      outbound: direct_out
+    - rule_set:
+        - 'geosite:cn'
+      outbound: direct_out
+    - rule_set:
+        - 'geoip:cn'
+      outbound: direct_out
+    - ip_is_private: true
+      outbound: direct_out
+  rule_set:
+    - tag: 'geosite:cn'
+      type: remote
+      format: binary
+      url: 'https://github.com/KaringX/karing-ruleset/raw/sing/geo/geosite/cn.srs'
+      download_detour: urltest_out
+    - tag: 'geoip:cn'
+      type: remote
+      format: binary
+      url: 'https://github.com/KaringX/karing-ruleset/raw/sing/geo/geoip/cn.srs'
+      download_detour: urltest_out
